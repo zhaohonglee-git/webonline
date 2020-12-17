@@ -1,26 +1,28 @@
 import React, { Component } from 'react'
-import Rainbow from '../hoc/Rainbow'
-import axios from 'axios'
+// import Rainbow from '../hoc/Rainbow'
+// import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Pokeball from '../pokeball.png'
+import { connect } from 'react-redux'
 
 class Home extends Component {
-  state = {
-    posts: []
-  }
+  // state = {
+  //   posts: []
+  // }
 
-  componentDidMount() {
-    axios.get('https://jsonplaceholder.typicode.com/posts').then(res => {
-      console.log(res)
-      this.setState({
-        posts: res.data.slice(0, 20)
-      })
-    })
-  }
+  // componentDidMount() {
+  //   axios.get('https://jsonplaceholder.typicode.com/posts').then(res => {
+  //     console.log(res)
+  //     this.setState({
+  //       posts: res.data.slice(0, 20)
+  //     })
+  //   })
+  // }
 
   render() {
+    // console.log(this.props)
 
-    const { posts } = this.state
+    const { posts } = this.props
     const postList = posts.length > 0 ? (
       posts.map(item => {
         return (
@@ -50,4 +52,11 @@ class Home extends Component {
   }
 }
 
-export default Rainbow(Home)
+// 拿数据
+const mapStateToProps = (state) => {
+  return {
+    posts: state.posts
+  }
+}
+
+export default connect(mapStateToProps)(Home)
